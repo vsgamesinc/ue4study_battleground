@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "CoreMinimal.h"
 #include "Mecha.generated.h"
 
 UCLASS()

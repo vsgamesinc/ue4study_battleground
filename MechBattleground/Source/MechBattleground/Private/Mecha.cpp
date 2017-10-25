@@ -7,7 +7,7 @@
 AMecha::AMecha()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true; 
 
 }
 
@@ -15,7 +15,7 @@ AMecha::AMecha()
 void AMecha::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//UE_LOG(LogTemp, Error, TEXT("AMecha::BeginPlay()"));
 }
 
 // Called every frame
