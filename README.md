@@ -8,3 +8,4 @@ test tepo for gamedev coding studies...
 * 05 - Finalize test Landscape lvl
 * 06 - Add Mecha (static + skeletal)
 * 07 - Add simple UI (menu & aim + simple logic)
+* 08 — Add MechaPlayerController & MechAIController prototypes
