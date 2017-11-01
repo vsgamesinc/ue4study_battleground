@@ -3,6 +3,8 @@
 #pragma once
 
 #include "Mecha.h"
+#include "MechaPlayerController.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Classes/GameFramework/Controller.h"
 #include "AIController.h"
@@ -16,13 +18,12 @@ class MECHBATTLEGROUND_API AMechAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
+private:
 	AMecha* GetControlledMecha() const;
+	AMecha* GetPlayerMecha() const;
 
 	virtual void BeginPlay() override;
 
-private:
 	AMecha* MechaUnderControl = nullptr;
-	
 	
 };
