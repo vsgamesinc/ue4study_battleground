@@ -21,20 +21,12 @@ void AMechAIController::BeginPlay()
 	AMechAIController::MechaUnderControl = AMechAIController::GetControlledMecha();
 	if (AMechAIController::MechaUnderControl != nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("AMechAIController: Enemy %s has been possessed by AI"), *(AMechAIController::MechaUnderControl->GetName()));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("AMechAIController: AI possessing error - no mecha found..."));
+		//UE_LOG(LogTemp, Error, TEXT("AMechAIController: Enemy %s has been possessed by AI"), *(AMechAIController::MechaUnderControl->GetName()));
 	}
 
 	AMecha* playerMecha = AMechAIController::GetPlayerMecha();
 	if (playerMecha)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AMechAIController: Detected enemy mecha: %s"), *(playerMecha->GetName()));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AMechAIController: Enemy mecha not found..."));
+		//UE_LOG(LogTemp, Warning, TEXT("AMechAIController: Detected enemy mecha: %s"), *(playerMecha->GetName()));
 	}
 }

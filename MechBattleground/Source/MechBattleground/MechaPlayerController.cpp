@@ -14,15 +14,28 @@ void AMechaPlayerController::BeginPlay()
 	Super::BeginPlay();
 	print(TEXT("Launch Mission. Drop down Scout BattleMech..."));
 
-	UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController::BeginPlay()"));
+	//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController::BeginPlay()"));
 	
 	AMechaPlayerController::MechaUnderControl = AMechaPlayerController::GetControlledMecha();
-	if (!AMechaPlayerController::MechaUnderControl)
+	if (AMechaPlayerController::MechaUnderControl)
 	{
-		UE_LOG(LogTemp, Error, TEXT("Control over Mecha not possesed"));
+		//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: Got control over Mecha %s"), *(AMechaPlayerController::MechaUnderControl->GetName()));
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Got control over Mecha %s"), *(AMechaPlayerController::MechaUnderControl->GetName()));
-	}
+}
+
+void AMechaPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: Tick %f"), DeltaTime);
+
+	AMechaPlayerController::AimTowardsCrosshair();
+}
+
+void AMechaPlayerController::AimTowardsCrosshair()
+{
+	if (!AMechaPlayerController::MechaUnderControl) { return; }
+
+	// linetrace to crosshair
+		// get location under the crosshair
 }

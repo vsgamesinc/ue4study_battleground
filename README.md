@@ -10,3 +10,4 @@ test tepo for gamedev coding studies...
 * 07 - Add simple UI (menu & aim + simple logic)
 * 08 - Add MechaPlayerController & MechAIController prototypes
 * 09 - MechAIController could find Player's AMecha
+* 10 - Add Tick and Aiming prototype to MechaPlayerController

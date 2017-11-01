@@ -21,8 +21,10 @@ public:
 	AMecha* GetControlledMecha() const;
 
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 	
 private:
 	AMecha* MechaUnderControl = nullptr;
 
+	void AimTowardsCrosshair();
 };
