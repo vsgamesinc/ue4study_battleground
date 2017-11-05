@@ -32,3 +32,9 @@ void AMecha::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AMecha::AimAt(FVector HitLocation)
+{
+	auto ourTankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *ourTankName, *HitLocation.ToString());
+}
+

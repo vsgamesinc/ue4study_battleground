@@ -9,6 +9,6 @@ public class MechBattlegroundEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 
-		ExtraModuleNames.AddRange( new string[] { "MechBattleground" } );
+        ExtraModuleNames.AddRange( new string[] { "MechBattleground" } );
 	}
 }

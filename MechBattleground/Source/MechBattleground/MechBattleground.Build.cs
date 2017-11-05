@@ -7,8 +7,12 @@ public class MechBattleground : ModuleRules
 	public MechBattleground(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+        // Compiler brute optimizations
+        MinFilesUsingPrecompiledHeaderOverride = 1;
+        bFasterWithoutUnity = true;
+
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

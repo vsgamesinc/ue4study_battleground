@@ -15,11 +15,12 @@ public:
 	// Sets default values for this pawn's properties
 	AMecha();
 
-protected:
+	void AimAt(FVector HitLocation);
+
+private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

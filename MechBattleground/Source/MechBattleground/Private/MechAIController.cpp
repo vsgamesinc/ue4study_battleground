@@ -30,3 +30,13 @@ void AMechAIController::BeginPlay()
 		//UE_LOG(LogTemp, Warning, TEXT("AMechAIController: Detected enemy mecha: %s"), *(playerMecha->GetName()));
 	}
 }
+
+void AMechAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (AMechAIController::MechaUnderControl != nullptr)
+	{
+		AMechAIController::MechaUnderControl->AimAt(AMechAIController::GetPlayerMecha()->GetActorLocation());
+	}
+}

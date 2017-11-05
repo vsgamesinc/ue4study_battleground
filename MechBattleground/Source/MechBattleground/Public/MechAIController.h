@@ -23,6 +23,7 @@ private:
 	AMecha* GetPlayerMecha() const;
 
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	AMecha* MechaUnderControl = nullptr;
 	
