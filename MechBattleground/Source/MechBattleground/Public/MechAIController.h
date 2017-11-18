@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Mecha.h"
 #include "MechaPlayerController.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "CoreMinimal.h"
@@ -10,6 +9,7 @@
 #include "AIController.h"
 #include "MechAIController.generated.h"
 
+class AMecha;
 /**
  * 
  */

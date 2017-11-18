@@ -10,6 +10,7 @@
 #include "MechAimingComponent.generated.h"
 
 class UMechTurret; //Forward declaration
+class UMechCabin;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MECHBATTLEGROUND_API UMechAimingComponent : public UActorComponent
@@ -23,6 +24,8 @@ public:
 private:
 	UMechTurret* GunTurret = nullptr;
 	UStaticMeshComponent* GunTurretBarrel = nullptr;
+	UMechCabin* MechCabin = nullptr;
+
 
 	void moveTurret(FVector AimDirection);
 
@@ -31,5 +34,6 @@ public:
 
 	void SetTurretGunReference(UMechTurret* GunToSet);
 	void SetTurretBarrelReference(UStaticMeshComponent* GunToSet);
+	void SetMechCabinReference(UMechCabin* CabToSet);
 	
 };

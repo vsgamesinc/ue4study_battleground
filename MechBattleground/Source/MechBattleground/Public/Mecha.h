@@ -2,13 +2,14 @@
 
 #pragma once
 
-#include "MechAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "CoreMinimal.h"
 #include "Runtime/CoreUObject/Public/UObject/UObjectGlobals.h"
 #include "Mecha.generated.h"
 
 class UMechTurret;
+class UMechCabin;
+class UMechAimingComponent;
 
 UCLASS()
 class MECHBATTLEGROUND_API AMecha : public APawn
@@ -23,6 +24,13 @@ public:
 	void SetTurretReference(UMechTurret* TurretToSet);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretBarrelReference(UStaticMeshComponent* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetMechCabinReference(UMechCabin* CabToSet);
+
+	UFUNCTION(BlueprintCallable, Category = "Shooting")
+	void FireMainWeapon();
+	UFUNCTION(BlueprintCallable, Category = "Shooting")
+	void FireAltWeapon();
 
 	UPROPERTY(EditAnywhere, Category = Shooting)
 	float turretShootSpeed = 100000;
@@ -35,9 +43,6 @@ private:
 	AMecha();
 
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

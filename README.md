@@ -13,3 +13,4 @@ test tepo for gamedev coding studies...
 * 10 - Add Tick and Aiming prototype to MechaPlayerController
 * 11 - Added aiming location functional for player (with player mecha filtering) and enemy pawns
 * 12 - Added aiming component for setting up aim params. Modifed Turret (Static -> Class)
+* 13 - Complete alpha-aiming system (associated with SuggestProjectileVelocity) + shoot controls prototype

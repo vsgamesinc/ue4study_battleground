@@ -15,12 +15,12 @@ class MECHBATTLEGROUND_API UMechTurret : public UStaticMeshComponent
 	GENERATED_BODY()
 	
 public:
-	void Elevate(float DegPerSec);
+	void Elevate(float RelativeSpeed);	// [-1,+1]
 	
 private:
 	// Speed of Mecha's Turret Aiming (deg per sec)
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float AimingSpeed = 20;
+	float AimingSpeed = 40;
 
 	// Speed of Mecha's Turret Aiming (deg per sec)
 	UPROPERTY(EditAnywhere, Category = Setup)

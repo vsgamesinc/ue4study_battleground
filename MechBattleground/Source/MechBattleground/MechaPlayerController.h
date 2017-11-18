@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Mecha.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h"
@@ -10,6 +9,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "MechaPlayerController.generated.h"
+
+class AMecha;
 
 /**
  * 
