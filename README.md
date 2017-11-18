@@ -12,3 +12,4 @@ test tepo for gamedev coding studies...
 * 09 - MechAIController could find Player's AMecha
 * 10 - Add Tick and Aiming prototype to MechaPlayerController
 * 11 - Added aiming location functional for player (with player mecha filtering) and enemy pawns
+* 12 - Added aiming component for setting up aim params. Modifed Turret (Static -> Class)

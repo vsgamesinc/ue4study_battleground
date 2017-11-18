@@ -9,7 +9,25 @@ AMecha::AMecha()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true; 
 
+	MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
+
+	//MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
 }
+
+void AMecha::SetTurretReference(UMechTurret* TurretToSet)
+{
+	if (!MechAimingComponent) return;
+	
+	MechAimingComponent->SetTurretGunReference(TurretToSet);
+}
+
+void AMecha::SetTurretBarrelReference(UStaticMeshComponent* BarrelToSet)
+{
+	if (!MechAimingComponent) return;
+
+	MechAimingComponent->SetTurretBarrelReference(BarrelToSet);
+}
+
 
 // Called when the game starts or when spawned
 void AMecha::BeginPlay()
@@ -34,7 +52,6 @@ void AMecha::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMecha::AimAt(FVector HitLocation)
 {
-	auto ourTankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *ourTankName, *HitLocation.ToString());
+	MechAimingComponent->AimAt(HitLocation, AMecha::turretShootSpeed);
 }
 

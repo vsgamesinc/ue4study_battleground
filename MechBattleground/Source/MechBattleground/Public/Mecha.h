@@ -2,9 +2,13 @@
 
 #pragma once
 
+#include "MechAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "CoreMinimal.h"
+#include "Runtime/CoreUObject/Public/UObject/UObjectGlobals.h"
 #include "Mecha.generated.h"
+
+class UMechTurret;
 
 UCLASS()
 class MECHBATTLEGROUND_API AMecha : public APawn
@@ -13,12 +17,23 @@ class MECHBATTLEGROUND_API AMecha : public APawn
 
 public:
 	// Sets default values for this pawn's properties
-	AMecha();
-
 	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UMechTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+	UPROPERTY(EditAnywhere, Category = Shooting)
+	float turretShootSpeed = 100000;
+
+protected:
+	UMechAimingComponent* MechAimingComponent = nullptr;
 
 private:
 	// Called when the game starts or when spawned
+	AMecha();
+
 	virtual void BeginPlay() override;
 	
 	// Called every frame
