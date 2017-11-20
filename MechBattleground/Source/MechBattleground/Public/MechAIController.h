@@ -19,12 +19,12 @@ class MECHBATTLEGROUND_API AMechAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-	AMecha* GetControlledMecha() const;
-	AMecha* GetPlayerMecha() const;
+	//AMecha* GetControlledMecha() const;
+	//AMecha* GetPlayerMecha() const;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
-	AMecha* MechaUnderControl = nullptr;
+	//AMecha* MechaUnderControl = nullptr;
 	
 };

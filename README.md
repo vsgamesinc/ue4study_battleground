@@ -15,3 +15,4 @@ test tepo for gamedev coding studies...
 * 12 - Added aiming component for setting up aim params. Modifed Turret (Static -> Class)
 * 13 - Complete alpha-aiming system (associated with SuggestProjectileVelocity) + shoot controls prototype
 * 14 - Complete alpha-shooting system (projectiles)
+* 15 - Base AI instructiona (aiming at player & shooting with reload time)

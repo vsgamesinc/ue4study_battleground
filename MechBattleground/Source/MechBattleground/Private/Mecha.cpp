@@ -59,15 +59,20 @@ void AMecha::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMecha::FireMainWeapon()
 {
-	if (!AMecha::TurretBarrel) { return; }
+	bool isReloaded = (FPlatformTime::Seconds() - AMecha::LastFireTime) > AMecha::turretReloadTime;
 
-	// Spawn projectile at the Socket location on the Turret
-	auto projectile = GetWorld()->SpawnActor<AProjectile>(
+	if (AMecha::TurretBarrel && isReloaded)
+	{
+		// Spawn projectile at the Socket location on the Turret
+		auto projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			AMecha::TurretBarrel->GetSocketLocation(FName("Projectile")),
 			AMecha::TurretBarrel->GetSocketRotation(FName("Projectile"))
-		);
-	projectile->LaunchProjectile(AMecha::turretShootSpeed);
+			);
+		projectile->LaunchProjectile(AMecha::turretShootSpeed);
+		
+		AMecha::LastFireTime = FPlatformTime::Seconds();
+	}
 }
 
 void AMecha::FireAltWeapon()

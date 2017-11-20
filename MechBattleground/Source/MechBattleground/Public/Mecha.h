@@ -38,6 +38,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Shooting)
 	float turretShootSpeed = 100000;
+	// Main Weapon reload time in seconds
+	UPROPERTY(EditDefaultsOnly, Category = Shooting)
+	float turretReloadTime = 3;
 
 protected:
 	UMechAimingComponent* MechAimingComponent = nullptr;
@@ -54,4 +57,5 @@ private:
 	// Local Turret Barrel ref for projectile spawning...
 	UStaticMeshComponent* TurretBarrel = nullptr;
 	
+	double LastFireTime = 0;
 };
