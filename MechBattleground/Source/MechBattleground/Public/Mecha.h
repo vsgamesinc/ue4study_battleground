@@ -10,6 +10,7 @@
 class UMechTurret;
 class UMechCabin;
 class UMechAimingComponent;
+class AProjectile;
 
 UCLASS()
 class MECHBATTLEGROUND_API AMecha : public APawn
@@ -33,6 +34,9 @@ public:
 	void FireAltWeapon();
 
 	UPROPERTY(EditAnywhere, Category = Shooting)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditAnywhere, Category = Shooting)
 	float turretShootSpeed = 100000;
 
 protected:
@@ -47,6 +51,7 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	// Local Turret Barrel ref for projectile spawning...
+	UStaticMeshComponent* TurretBarrel = nullptr;
 	
 };
