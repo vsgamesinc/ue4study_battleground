@@ -18,7 +18,7 @@ void AMechAIController::Tick(float DeltaTime)
 	
 	if (playerMecha)
 	{
-		thisMecha->AimAt(playerMecha->GetActorLocation());
+		//thisMecha->AimAt(playerMecha->GetActorLocation());
 		thisMecha->FireMainWeapon(); //TODO scale bot fire time
 	}
 }

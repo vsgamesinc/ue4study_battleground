@@ -16,3 +16,4 @@ test tepo for gamedev coding studies...
 * 13 - Complete alpha-aiming system (associated with SuggestProjectileVelocity) + shoot controls prototype
 * 14 - Complete alpha-shooting system (projectiles)
 * 15 - Base AI instructiona (aiming at player & shooting with reload time)
+* 16 - Fixed aiming bug, added animation BP with sample logic, added force input for new c++ component UMechaTransmission (aiming on player partitially off)

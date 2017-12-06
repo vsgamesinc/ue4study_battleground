@@ -72,9 +72,14 @@ void UMechAimingComponent::moveTurret(FVector AimDirection)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("AimDirection: %s"), *(AimDirection.ToString()));
 	auto TurretRotator = UMechAimingComponent::GunTurret->GetForwardVector().Rotation();
+	auto CabRotator = UMechAimingComponent::MechCabin->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - TurretRotator;
-
-	UMechAimingComponent::GunTurret->Elevate(DeltaRotator.Pitch);
-	UMechAimingComponent::MechCabin->LookRotate(DeltaRotator.Yaw);
+	auto DeltaTurretRotator = AimAsRotator - TurretRotator;
+	auto DeltaCabinRotator = AimAsRotator - CabRotator;
+	if (DeltaCabinRotator.Yaw > 200.0f) DeltaCabinRotator.Yaw = DeltaCabinRotator.Yaw - 360.0f;	// fix rotation positive
+	if (DeltaCabinRotator.Yaw < -200.0f) DeltaCabinRotator.Yaw = DeltaCabinRotator.Yaw + 360.0f; // fix rotation negative
+	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator YAW: %f (orig: %f) + CAB: %f + delta = %f"), AimAsRotator.Yaw, AimDirection.Rotation().Yaw, CabRotator.Yaw, DeltaCabinRotator.Yaw);
+	
+	UMechAimingComponent::GunTurret->Elevate(DeltaTurretRotator.Pitch);
+	UMechAimingComponent::MechCabin->LookRotate(DeltaCabinRotator.Yaw);
 }
