@@ -17,9 +17,19 @@ class MECHBATTLEGROUND_API UMechaTransmission : public USkeletalMeshComponent
 public:
 	UFUNCTION(BlueprintCallable, category = "Input")
 	void SetVelocity(float Direction);
+	UFUNCTION(BlueprintCallable, category = "Input")
+	void SetMotionRotation(float RotationDirection);
+	UFUNCTION(BlueprintCallable, category = "Input")
+	void SetMotionJump(float Direction);
 	
 	// Maximum Mecha Transmission driving force in Newtons
-	UPROPERTY(EditDefaultsOnly)
-	float MaxDrivingForce = 500000.0f;	// Force to 50 tonn Mecha with 1g acceleration
+	UPROPERTY(EditDefaultsOnly, category = "Drive")
+	float MaxDrivingForce = 50000000.0f;
+	// Maximum Mecha Transmission JumpJet force in Newtons
+	UPROPERTY(EditDefaultsOnly, category = "Drive")
+	float MaxJumpingForce = 50000000.0f;
+	// Degreese to rotation
+	UPROPERTY(EditDefaultsOnly, category = "Drive")
+	float MaxRotationSpeed = 30.0f;
 	
 };

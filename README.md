@@ -17,3 +17,4 @@ test tepo for gamedev coding studies...
 * 14 - Complete alpha-shooting system (projectiles)
 * 15 - Base AI instructiona (aiming at player & shooting with reload time)
 * 16 - Fixed aiming bug, added animation BP with sample logic, added force input for new c++ component UMechaTransmission (aiming on player partitially off)
+* 17 - Changing some physics settings, added physical material to Capsule, added some motion logic to UMechaTransmission (moving forward, jumping, rotating)
