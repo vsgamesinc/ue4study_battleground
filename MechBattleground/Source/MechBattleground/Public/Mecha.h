@@ -10,6 +10,7 @@
 class UMechTurret;
 class UMechCabin;
 class UMechAimingComponent;
+class UMechaNavMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -44,6 +45,8 @@ public:
 
 protected:
 	UMechAimingComponent* MechAimingComponent = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UMechaNavMovementComponent* MechMovementComponent = nullptr;
 
 private:
 	// Called when the game starts or when spawned

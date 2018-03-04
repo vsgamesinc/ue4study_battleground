@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайты
 
 #include "MechAIController.h"
 #include "Mecha.h"
@@ -12,13 +12,20 @@ void AMechAIController::BeginPlay()
 void AMechAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	auto playerMecha = Cast<AMecha>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto thisMecha = Cast<AMecha>(GetPawn());
+
+	MoveToActor(playerMecha,
+				mechaAcceptanceRadius,
+				false,
+				true,
+				false
+	);
 	
 	if (playerMecha)
 	{
-		//thisMecha->AimAt(playerMecha->GetActorLocation());
+		thisMecha->AimAt(playerMecha->GetActorLocation());
 		thisMecha->FireMainWeapon(); //TODO scale bot fire time
 	}
 }

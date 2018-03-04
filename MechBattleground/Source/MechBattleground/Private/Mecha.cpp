@@ -3,6 +3,7 @@
 #include "Mecha.h"
 #include "MechCabin.h"
 #include "MechAimingComponent.h"
+#include "MechaNavMovementComponent.h"
 #include "Projectile.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "Runtime/Engine/Classes/Components/SceneComponent.h"
@@ -15,7 +16,7 @@ AMecha::AMecha()
 	PrimaryActorTick.bCanEverTick = false; 
 
 	MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
-
+	//MechMovementComponent = CreateDefaultSubobject<UMechaNavMovementComponent>(FName("Movement Component"));
 	//MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
 }
 

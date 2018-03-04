@@ -22,6 +22,10 @@ private:
 	//AMecha* GetControlledMecha() const;
 	//AMecha* GetPlayerMecha() const;
 
+	// radius for Mecha moving perception
+	UPROPERTY(EditAnywhere)
+	float mechaAcceptanceRadius = 3000.0f;
+
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
