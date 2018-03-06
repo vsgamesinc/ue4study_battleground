@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайты
 
 #pragma once
 
@@ -22,28 +22,22 @@ public:
 	// Sets default values for this pawn's properties
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UMechTurret* TurretToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretBarrelReference(UStaticMeshComponent* BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetMechCabinReference(UMechCabin* CabToSet);
-
 	UFUNCTION(BlueprintCallable, Category = "Shooting")
 	void FireMainWeapon();
 	UFUNCTION(BlueprintCallable, Category = "Shooting")
 	void FireAltWeapon();
 
-	UPROPERTY(EditAnywhere, Category = Shooting)
+	UPROPERTY(EditAnywhere, Category = "Shooting")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-	UPROPERTY(EditAnywhere, Category = Shooting)
+	UPROPERTY(EditAnywhere, Category = "Shooting")
 	float turretShootSpeed = 100000;
 	// Main Weapon reload time in seconds
-	UPROPERTY(EditDefaultsOnly, Category = Shooting)
+	UPROPERTY(EditDefaultsOnly, Category = "Shooting")
 	float turretReloadTime = 3;
 
 protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Shoot")
 	UMechAimingComponent* MechAimingComponent = nullptr;
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	UMechaNavMovementComponent* MechMovementComponent = nullptr;
@@ -52,13 +46,8 @@ private:
 	// Called when the game starts or when spawned
 	AMecha();
 
-	virtual void BeginPlay() override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	// Local Turret Barrel ref for projectile spawning...
-	UStaticMeshComponent* TurretBarrel = nullptr;
+	// pointer to barrel to generate projectile
+	UMechTurret* TurretBarrel = nullptr; // TODO Remove
 	
 	double LastFireTime = 0;
 };

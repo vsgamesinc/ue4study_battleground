@@ -19,9 +19,11 @@ UCLASS()
 class MECHBATTLEGROUND_API AMechaPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	AMecha * GetControlledMecha() const;
 
 public:
-	AMecha* GetControlledMecha() const;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;

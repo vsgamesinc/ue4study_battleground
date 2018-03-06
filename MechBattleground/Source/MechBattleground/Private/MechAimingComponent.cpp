@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайты
 
 #include "MechAimingComponent.h"
 #include "MechTurret.h"
@@ -15,19 +15,11 @@ UMechAimingComponent::UMechAimingComponent()
 	// ...
 }
 
-void UMechAimingComponent::SetTurretGunReference(UMechTurret* GunToSet)
+void UMechAimingComponent::Init(UMechCabin* cabinToSet, UStaticMeshComponent* gunTurretBarrelToSet, UMechTurret* gunTurretToSet)
 {
-	UMechAimingComponent::GunTurret = GunToSet;
-}
-
-void UMechAimingComponent::SetTurretBarrelReference(UStaticMeshComponent* GunToSet)
-{
-	UMechAimingComponent::GunTurretBarrel = GunToSet;
-}
-
-void UMechAimingComponent::SetMechCabinReference(UMechCabin* CabToSet)
-{
-	UMechAimingComponent::MechCabin = CabToSet;
+	MechCabin = cabinToSet;
+	GunTurretBarrel = gunTurretBarrelToSet;
+	GunTurret = gunTurretToSet;
 }
 
 void UMechAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
@@ -70,6 +62,7 @@ void UMechAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UMechAimingComponent::moveTurret(FVector AimDirection)
 {
+	if (!GunTurret || !MechCabin) { return; }
 	//UE_LOG(LogTemp, Warning, TEXT("AimDirection: %s"), *(AimDirection.ToString()));
 	auto TurretRotator = UMechAimingComponent::GunTurret->GetForwardVector().Rotation();
 	auto CabRotator = UMechAimingComponent::MechCabin->GetForwardVector().Rotation();

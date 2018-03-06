@@ -18,3 +18,5 @@ test tepo for gamedev coding studies...
 * 15 - Base AI instructiona (aiming at player & shooting with reload time)
 * 16 - Fixed aiming bug, added animation BP with sample logic, added force input for new c++ component UMechaTransmission (aiming on player partitially off)
 * 17 - Changing some physics settings, added physical material to Capsule, added some motion logic to UMechaTransmission (moving forward, jumping, rotating)
+* 18 - Added Nav Movement component for AI & some AI fixes
+* 19 - move UE logic of aiming component to BP. Has HARD CRASH on run

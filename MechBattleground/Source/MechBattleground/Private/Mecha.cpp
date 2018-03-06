@@ -1,7 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайты
 
 #include "Mecha.h"
 #include "MechCabin.h"
+#include "MechTurret.h"
 #include "MechAimingComponent.h"
 #include "MechaNavMovementComponent.h"
 #include "Projectile.h"
@@ -13,49 +14,7 @@
 AMecha::AMecha()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false; 
-
-	MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
-	//MechMovementComponent = CreateDefaultSubobject<UMechaNavMovementComponent>(FName("Movement Component"));
-	//MechAimingComponent = CreateDefaultSubobject<UMechAimingComponent>(FName("Aiming Component"));
-}
-
-void AMecha::SetTurretReference(UMechTurret* TurretToSet)
-{
-	if (!MechAimingComponent) return;
-	
-	MechAimingComponent->SetTurretGunReference(TurretToSet);
-}
-
-void AMecha::SetTurretBarrelReference(UStaticMeshComponent* BarrelToSet)
-{
-	if (!MechAimingComponent) return;
-
-	MechAimingComponent->SetTurretBarrelReference(BarrelToSet);
-
-	AMecha::TurretBarrel = BarrelToSet;
-}
-
-void AMecha::SetMechCabinReference(UMechCabin* CabToSet)
-{
-	if (!CabToSet) return;
-
-	MechAimingComponent->SetMechCabinReference(CabToSet);
-}
-
-
-// Called when the game starts or when spawned
-void AMecha::BeginPlay()
-{
-	Super::BeginPlay();
-	//UE_LOG(LogTemp, Error, TEXT("AMecha::BeginPlay()"));
-}
-
-// Called to bind functionality to input
-void AMecha::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 void AMecha::FireMainWeapon()
