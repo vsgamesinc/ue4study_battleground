@@ -23,7 +23,7 @@ private:
 	//AMecha* GetPlayerMecha() const;
 
 	// radius for Mecha moving perception
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "AI Controller")
 	float mechaAcceptanceRadius = 3000.0f;
 
 	virtual void BeginPlay() override;

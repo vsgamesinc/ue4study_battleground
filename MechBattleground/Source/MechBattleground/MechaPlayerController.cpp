@@ -1,26 +1,18 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайт
 
 #include "MechaPlayerController.h"
-#include "Mecha.h"
+#include "MechAimingComponent.h"
 
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
-
-AMecha* AMechaPlayerController::GetControlledMecha() const
-{
-	return Cast<AMecha>(GetPawn());
-}
 
 void AMechaPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	print(TEXT("Launch Mission. Drop down Scout BattleMech..."));
 
-	//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController::BeginPlay()"));
-	
-	AMechaPlayerController::MechaUnderControl = AMechaPlayerController::GetControlledMecha();
-	if (AMechaPlayerController::MechaUnderControl)
+	auto AimingComponent = GetPawn()->FindComponentByClass<UMechAimingComponent>();
+	if (ensure(AimingComponent))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: Got control over Mecha %s"), *(AMechaPlayerController::MechaUnderControl->GetName()));
+		FindAimingComponent(AimingComponent);
 	}
 }
 
@@ -28,19 +20,19 @@ void AMechaPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: Tick %f"), DeltaTime);
-
-	AMechaPlayerController::AimTowardsCrosshair();
+	AimTowardsCrosshair();
 }
 
 void AMechaPlayerController::AimTowardsCrosshair()
 {
-	if (!AMechaPlayerController::MechaUnderControl) { return; }
-
-	FVector HitLocation; // Out param
-	if (GetSightRayHitLocation(HitLocation))
+	auto AimingComponent = GetPawn()->FindComponentByClass<UMechAimingComponent>();
+	if (ensure(AimingComponent))
 	{
-		AMechaPlayerController::MechaUnderControl->AimAt(HitLocation);
+		FVector HitLocation; // Out param
+		if (GetSightRayHitLocation(HitLocation))
+		{
+			AimingComponent->AimAt(HitLocation);
+		}
 	}
 }
 
@@ -53,10 +45,10 @@ bool AMechaPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) con
 	
 	FVector LookDirection;
 	
-	if (AMechaPlayerController::GetLookDirection(ScreenLocation, LookDirection))
+	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: AimWorldDirection = %s"), *LookDirection.ToString());
-		if (AMechaPlayerController::GetLookVectorHitLocation(LookDirection, OutHitLocation))
+		if (GetLookVectorHitLocation(LookDirection, OutHitLocation))
 		{
 			//UE_LOG(LogTemp, Warning, TEXT("AMechaPlayerController: HitLocation = %s"), *OutHitLocation.ToString());
 
@@ -84,7 +76,7 @@ bool AMechaPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector&
 bool AMechaPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const
 {
 	auto startTrace = PlayerCameraManager->GetCameraLocation();
-	auto endTrace = startTrace + (AMechaPlayerController::LineTraceRange * LookDirection);
+	auto endTrace = startTrace + (LineTraceRange * LookDirection);
 	FHitResult hitResult;
 	FCollisionQueryParams collisionParams;
 	collisionParams.AddIgnoredActor(Cast<AActor>(GetWorld()->GetFirstPlayerController()->GetPawn()));

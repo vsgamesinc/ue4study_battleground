@@ -3,16 +3,12 @@
 #include "MechAimingComponent.h"
 #include "MechTurret.h"
 #include "MechCabin.h"
-
+#include "Projectile.h"
 
 // Sets default values for this component's properties
 UMechAimingComponent::UMechAimingComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-	// ...
 }
 
 void UMechAimingComponent::Init(UMechCabin* cabinToSet, UStaticMeshComponent* gunTurretBarrelToSet, UMechTurret* gunTurretToSet)
@@ -22,20 +18,43 @@ void UMechAimingComponent::Init(UMechCabin* cabinToSet, UStaticMeshComponent* gu
 	GunTurret = gunTurretToSet;
 }
 
-void UMechAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UMechAimingComponent::FireMainWeapon()
 {
-	if (!UMechAimingComponent::GunTurret) { return; }
-	if (!UMechAimingComponent::GunTurretBarrel) { return; }
-	if (!UMechAimingComponent::MechCabin) { return; }
+	if (!ensure(GunTurretBarrel && ProjectileBlueprint)) { return; }
+
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > turretReloadTime;
+
+	if (isReloaded)
+	{
+		// Spawn projectile at the Socket location on the Turret
+		auto projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			GunTurretBarrel->GetSocketLocation(FName("Projectile")),
+			GunTurretBarrel->GetSocketRotation(FName("Projectile"))
+			);
+		projectile->LaunchProjectile(turretShootSpeed);
+
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}
+
+void UMechAimingComponent::FireAltWeapon()
+{
+	//UE_LOG(LogTemp, Error, TEXT("AMecha::FireAltWeapon()"));
+}
+
+void UMechAimingComponent::AimAt(FVector HitLocation)
+{
+	if (!ensure(GunTurret && GunTurretBarrel && MechCabin)) { return; }
 
 	FVector OutLaunchVelocity;
-	FVector StartLocation = UMechAimingComponent::GunTurretBarrel->GetSocketLocation(FName("Projectile"));
+	FVector StartLocation = GunTurretBarrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(
 		this,
 		OutLaunchVelocity,
 		StartLocation,
 		HitLocation,
-		LaunchSpeed,
+		turretShootSpeed,
 		false,
 		0,
 		0,
@@ -62,7 +81,7 @@ void UMechAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UMechAimingComponent::moveTurret(FVector AimDirection)
 {
-	if (!GunTurret || !MechCabin) { return; }
+	if (!ensure(GunTurret && MechCabin)) { return; }
 	//UE_LOG(LogTemp, Warning, TEXT("AimDirection: %s"), *(AimDirection.ToString()));
 	auto TurretRotator = UMechAimingComponent::GunTurret->GetForwardVector().Rotation();
 	auto CabRotator = UMechAimingComponent::MechCabin->GetForwardVector().Rotation();

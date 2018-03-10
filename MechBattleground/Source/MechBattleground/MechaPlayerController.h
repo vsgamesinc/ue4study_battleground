@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ÷опирайт
 
 #pragma once
 
@@ -10,18 +10,18 @@
 #include "GameFramework/PlayerController.h"
 #include "MechaPlayerController.generated.h"
 
-class AMecha;
+class UMechAimingComponent;
 
 /**
- * 
+ * Responsible to helping player aim
  */
 UCLASS()
 class MECHBATTLEGROUND_API AMechaPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	AMecha * GetControlledMecha() const;
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FindAimingComponent(UMechAimingComponent* MechAimRef);
 
 public:
 
@@ -29,17 +29,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// crosshair screen position (relative)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=GUI_Params)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GUI")
 	float CrosshairScreenXLocation = 0.5f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GUI_Params)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GUI")
 	float CrosshairScreenYLocation = 0.25f;
 	// visible distance
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Shooting_Params)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot")
 	float LineTraceRange = 1000000.0f;
 	
 private:
-	AMecha* MechaUnderControl = nullptr;
-
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;

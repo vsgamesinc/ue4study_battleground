@@ -17,12 +17,12 @@ class MECHBATTLEGROUND_API UMechaNavMovementComponent : public UNavMovementCompo
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, category = "Setup")
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Init(UMechaTransmission* transmissionToSet);
 	
-	UFUNCTION(BlueprintCallable, category = "Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void IntendMoveForward(float Throw);
-	UFUNCTION(BlueprintCallable, category = "Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void IntendTurnRight(float Throw);
 
 	

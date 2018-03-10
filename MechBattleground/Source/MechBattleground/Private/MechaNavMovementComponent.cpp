@@ -14,19 +14,20 @@ void UMechaNavMovementComponent::RequestDirectMove(const FVector& MoveVelocity, 
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 	float IntendMoveForwardValue = FVector::DotProduct(TankForward, AIForwardIntention);
 	float IntendTurnRightValue = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
-	IntendMoveForward(IntendMoveForwardValue);
-	IntendTurnRight(IntendTurnRightValue);
+	// TODO Fix air freezing
+	//IntendMoveForward(IntendMoveForwardValue);
+	//IntendTurnRight(IntendTurnRightValue);
 }
 
 void UMechaNavMovementComponent::IntendMoveForward(float Throw)
 {
-	if (!MechaTransmission) { return; }
+	if (!ensure(MechaTransmission)) { return; }
 	MechaTransmission->SetVelocity(Throw);
 }
 
 void UMechaNavMovementComponent::IntendTurnRight(float Throw)
 {
-	if (!MechaTransmission) { return; }
+	if (!ensure(MechaTransmission)) { return; }
 	MechaTransmission->SetMotionRotation(Throw);
 }
 

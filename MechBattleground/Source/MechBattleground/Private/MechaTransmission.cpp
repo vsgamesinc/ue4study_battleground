@@ -16,7 +16,7 @@ void UMechaTransmission::SetVelocity(float Direction)
 
 void UMechaTransmission::SetMotionJump(float Direction)
 {
-	UE_LOG(LogTemp, Warning, TEXT("UMechaTransmission::SetMotionJump: %f"), Direction);
+	//UE_LOG(LogTemp, Warning, TEXT("UMechaTransmission::SetMotionJump: %f"), Direction);
 	if (Direction > 0)
 	{
 		auto ForceApplied = GetUpVector() * Direction * UMechaTransmission::MaxJumpingForce;
@@ -33,7 +33,7 @@ void UMechaTransmission::SetMotionRotation(float RotationDirection)
 	auto RotationChange = RotationDirection * UMechaTransmission::MaxRotationSpeed * GetWorld()->DeltaTimeSeconds;
 	//auto RawNewRotation = RelativeRotation.Yaw + RotationChange;
 	auto mechaRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	UE_LOG(LogTemp, Warning, TEXT("UMechaTransmission::SetMotionRotation(%f): %f"), RotationChange, mechaRoot->RelativeRotation.Yaw);
+	//UE_LOG(LogTemp, Warning, TEXT("UMechaTransmission::SetMotionRotation(%f): %f"), RotationChange, mechaRoot->RelativeRotation.Yaw);
 	auto RawNewRotation = mechaRoot->RelativeRotation.Yaw + RotationChange;
 	mechaRoot->SetRelativeRotation(FRotator(0, RawNewRotation, 0));
 	//SetRelativeRotation(FRotator(0, RawNewRotation, 0));

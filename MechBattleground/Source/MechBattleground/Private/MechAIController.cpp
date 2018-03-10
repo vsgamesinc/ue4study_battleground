@@ -1,7 +1,7 @@
 // ÷опирайты
 
 #include "MechAIController.h"
-#include "Mecha.h"
+#include "MechAimingComponent.h"
 
 
 void AMechAIController::BeginPlay()
@@ -13,19 +13,15 @@ void AMechAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	auto playerMecha = Cast<AMecha>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto thisMecha = Cast<AMecha>(GetPawn());
+	auto playerMecha = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto botMecha = GetPawn();
+	if (!ensure(playerMecha && botMecha)) { return; }
 
 	MoveToActor(playerMecha,
-				mechaAcceptanceRadius,
-				false,
-				true,
-				false
+				mechaAcceptanceRadius
 	);
 	
-	if (playerMecha)
-	{
-		thisMecha->AimAt(playerMecha->GetActorLocation());
-		thisMecha->FireMainWeapon(); //TODO scale bot fire time
-	}
+	auto aimComponent = botMecha->FindComponentByClass<UMechAimingComponent>();
+	aimComponent->AimAt(playerMecha->GetActorLocation());
+	aimComponent->FireMainWeapon(); //TODO scale bot fire time
 }

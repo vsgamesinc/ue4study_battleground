@@ -20,3 +20,4 @@ test tepo for gamedev coding studies...
 * 17 - Changing some physics settings, added physical material to Capsule, added some motion logic to UMechaTransmission (moving forward, jumping, rotating)
 * 18 - Added Nav Movement component for AI & some AI fixes
 * 19 - move UE logic of aiming component to BP. Has HARD CRASH on run
+* 20 - hard crash fixed. Made massive refactoring to decoupling codebase // Still need to fix aiming and movement
